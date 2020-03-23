@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isaac.StandartCalculatorController">
+    <children>
+        <Button fx:id="buttonNum1" layoutX="34.0" layoutY="289.0" mnemonicParsing="false" onAction="#handleNumButtonAction" prefHeight="39.0" prefWidth="34.0" text="1">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="buttonNum2" layoutX="93.0" layoutY="289.0" mnemonicParsing="false" onAction="#handleNumButtonAction" prefHeight="39.0" prefWidth="34.0" text="2">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="buttonNum3" layoutX="156.0" layoutY="289.0" mnemonicParsing="false" onAction="#handleNumButtonAction" prefHeight="39.0" prefWidth="34.0" text="3">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="buttonNum4" layoutX="34.0" layoutY="231.0" mnemonicParsing="false" onAction="#handleNumButtonAction" prefHeight="39.0" prefWidth="34.0" text="4">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="buttonNum5" layoutX="93.0" layoutY="231.0" mnemonicParsing="false" onAction="#handleNumButtonAction" prefHeight="39.0" prefWidth="34.0" text="5">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="buttonNum6" layoutX="156.0" layoutY="231.0" mnemonicParsing="false" onAction="#handleNumButtonAction" prefHeight="39.0" prefWidth="34.0" text="6">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="buttonNum7" layoutX="34.0" layoutY="173.0" mnemonicParsing="false" onAction="#handleNumButtonAction" prefHeight="39.0" prefWidth="34.0" text="7">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="buttonNum8" layoutX="93.0" layoutY="173.0" mnemonicParsing="false" onAction="#handleNumButtonAction" prefHeight="39.0" prefWidth="34.0" text="8">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="buttonNum9" layoutX="156.0" layoutY="173.0" mnemonicParsing="false" onAction="#handleNumButtonAction" prefHeight="39.0" prefWidth="34.0" text="9">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <TextField fx:id="textField" layoutX="34.0" layoutY="42.0" prefHeight="59.0" prefWidth="413.0" />
+        <Button fx:id="buttonNum0" layoutX="34.0" layoutY="348.0" mnemonicParsing="false" onAction="#handleNumButtonAction" prefHeight="39.0" prefWidth="34.0" text="0">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="buttonDel" layoutX="92.0" layoutY="348.0" mnemonicParsing="false" onAction="#handleDelButtonAction" prefHeight="44.0" prefWidth="42.0" text="Del">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Button>
+        <Button fx:id="buttonPlus" layoutX="223.0" layoutY="348.0" mnemonicParsing="false" onAction="#handlePlusButtonAction" prefHeight="39.0" prefWidth="34.0" text="+">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="buttonDivision" layoutX="223.0" layoutY="173.0" mnemonicParsing="false" onAction="#handleDivisionButtonAction" prefHeight="44.0" prefWidth="42.0" text="/">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="buttonTimes" layoutX="224.0" layoutY="231.0" mnemonicParsing="false" onAction="#handleTimesButtonAction" prefHeight="44.0" prefWidth="42.0" text="*">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="buttonMinus" layoutX="223.0" layoutY="289.0" mnemonicParsing="false" onAction="#handleMinusButtonAction" prefHeight="44.0" prefWidth="42.0" text="-">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="buttonCalc" layoutX="34.0" layoutY="116.0" mnemonicParsing="false" onAction="#handleCalcButtonAction" prefHeight="33.0" prefWidth="413.0" text="Calculate">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Button>
+        <Button fx:id="buttonBracketLeft" layoutX="288.0" layoutY="289.0" mnemonicParsing="false" onAction="#handleBracketLButtonAction" prefHeight="44.0" prefWidth="40.0" text="(">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="buttonBracketRight" layoutX="288.0" layoutY="231.0" mnemonicParsing="false" onAction="#handleBracketRButtonAction" prefHeight="44.0" prefWidth="40.0" text=")">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="buttonNegRight" layoutX="288.0" layoutY="173.0" mnemonicParsing="false" onAction="#handleNegButtonAction" prefHeight="44.0" prefWidth="40.0" text="-" textFill="#eb0000">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button fx:id="buttonPower" layoutX="345.0" layoutY="173.0" mnemonicParsing="false" onAction="#handlePowerButtonAction" prefHeight="39.0" prefWidth="34.0" text="^">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Button>
+        <Button layoutX="309.0" layoutY="461.0" mnemonicParsing="false" onAction="#handleMenuButtonAction" prefHeight="25.0" prefWidth="156.0" text="Menu" />
+    </children>
+</AnchorPane>
