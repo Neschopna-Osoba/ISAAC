@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package isaac;
 
 import java.awt.Graphics;
@@ -12,8 +7,9 @@ import java.util.ArrayList;
 import javax.swing.JComponent;
 
 /**
+ * This class create graph
  *
- * @author petrs
+ * @author Petr Salavec, 2020
  */
 class MakeGraph extends JComponent {
 
@@ -23,6 +19,7 @@ class MakeGraph extends JComponent {
         function = text;
     }
 
+    @Override
     public void paintComponent(Graphics g) {
 
         Polygon p1 = new Polygon();
@@ -55,32 +52,26 @@ class MakeGraph extends JComponent {
         boolean log10 = false;
         boolean ln = false;
 
-        for (int i = 0; i < function.size(); i++) {
-            if (function.get(i) == "sin") {
+        for (int i = 0; i < function.size(); i++) { //Here, we find what type of function it is
+            if ("sin".equals(function.get(i))) {
                 goniopos = i;
                 sin = true;
-            }
-            if (function.get(i) == "cos") {
+            } else if ("cos".equals(function.get(i))) {
                 goniopos = i;
                 cos = true;
-            }
-            if (function.get(i) == "tg") {
+            } else if ("tg".equals(function.get(i))) {
                 goniopos = i;
                 tg = true;
-            }
-            if (function.get(i) == "cotg") {
+            } else if ("cotg".equals(function.get(i))) {
                 goniopos = i;
                 cotg = true;
-            }
-            if (function.get(i) == "^") {
+            } else if ("^".equals(function.get(i))) {
                 powpos = i;
                 pow = true;
-            }
-            if (function.get(i) == "log10") {
+            } else if ("log10".equals(function.get(i))) {
                 logpos = i;
                 log10 = true;
-            }
-            if (function.get(i) == "ln") {
+            } else if ("ln".equals(function.get(i))) {
                 logpos = i;
                 ln = true;
             }
@@ -89,20 +80,21 @@ class MakeGraph extends JComponent {
             }   */
         }
 
-        if (sin || cos || tg || cotg) { //Gonio functions
+        if (sin || cos || tg || cotg) { //Goniometric functions
 
-            int gonmult = 0;
-            int varmult = 0;
-            int gonabs = 0;
-            int varabs = 0;
-
+            // gonmult * sin ( varmult * x + varabs) + gonabs
+            int gonmult = 0; //Gonimetric multiplier
+            int varmult = 0; //Variable multiplier
+            int gonabs = 0; //Goniometric absolute element
+            int varabs = 0; //Variable absolute lement
             boolean brackets = false;
-            if (function.get(goniopos - 1) == "-") {
+
+            if ("-".equals(function.get(goniopos - 1))) {
                 gonmult = -1;
-            } else if (function.get(goniopos - 1) == "+") {
+            } else if ("+".equals(function.get(goniopos - 1))) {
                 gonmult = 1;
-            } else if (function.get(goniopos - 1) == "*") {
-                if (function.get(goniopos - 3) == "-") {
+            } else if ("*".equals(function.get(goniopos - 1))) {
+                if ("-".equals(function.get(goniopos - 3))) {
                     gonmult = -Integer.valueOf(function.get(goniopos - 2));
                 } else {
                     gonmult = Integer.valueOf(function.get(goniopos - 2));
@@ -111,12 +103,12 @@ class MakeGraph extends JComponent {
 
             for (int i = 0; i < function.size(); i++) {
 
-                if (function.get(i) == ")") {
+                if (")".equals(function.get(i))) {
                     brackets = false;
                     try {
-                        if (function.get(i + 1) == "-") {
+                        if ("-".equals(function.get(i + 1))) {
                             gonabs = -Integer.valueOf(function.get(i + 2));
-                        } else if (function.get(i + 1) == "+") {
+                        } else if ("+".equals(function.get(i + 1))) {
                             gonabs = Integer.valueOf(function.get(i + 2));
                         }
 
@@ -126,31 +118,30 @@ class MakeGraph extends JComponent {
 
                 }
                 if (brackets) {
-                    if (function.get(i) == "x") {
-                        if (function.get(i - 1) == "(") {
+                    if ("x".equals(function.get(i))) {
+                        if ("(".equals(function.get(i - 1))) {
                             varmult = 1;
-                        } else if (function.get(i - 1) == "-") {
+                        } else if ("-".equals(function.get(i - 1))) {
                             varmult = -1;
-                        } else if (function.get(i - 1) == "*") {
+                        } else if ("*".equals(function.get(i - 1))) {
 
-                            if (function.get(i - 3) == "-") {
+                            if ("-".equals(function.get(i - 3))) {
                                 varmult = -Integer.valueOf(function.get(i - 2));
                             } else {
                                 varmult = Integer.valueOf(function.get(i - 2));
-                                System.out.println("zde");
                             }
                         }
-                        if (function.get(i + 1) == ")") {
+                        if (")".equals(function.get(i + 1))) {
                             varabs = 0;
-                        } else if (function.get(i + 1) == "-") {
+                        } else if ("-".equals(function.get(i + 1))) {
                             varabs = -Integer.valueOf(function.get(i + 2));
-                        } else if (function.get(i + 1) == "+") {
+                        } else if ("+".equals(function.get(i + 1))) {
                             varabs = Integer.valueOf(function.get(i + 2));
                         }
                     }
 
                 }
-                if (function.get(i) == "(") {
+                if ("(".equals(function.get(i))) {
                     brackets = true;
                 }
             }
@@ -230,9 +221,9 @@ class MakeGraph extends JComponent {
             powvalue = Integer.valueOf(function.get(powpos + 1));
 
             try {
-                if (function.get(powpos + 2) == "-") {
+                if ("-".equals(function.get(powpos + 2))) {
                     powabs = -Integer.valueOf(function.get(powpos + 3));
-                } else if (function.get(powpos + 2) == "+") {
+                } else if ("+".equals(function.get(powpos + 2))) {
                     powabs = Integer.valueOf(function.get(powpos + 3));
                 }
             } catch (Exception e) {
@@ -240,33 +231,33 @@ class MakeGraph extends JComponent {
             }
 
             for (int i = 0; i < function.size(); i++) {
-                if (function.get(i) == "(") {
-                    if (function.get(i - 1) == "-") {
+                if ("(".equals(function.get(i))) {
+                    if ("-".equals(function.get(i - 1))) {
                         powmult = -1;
-                    } else if (function.get(i - 1) == "+") {
+                    } else if ("+".equals(function.get(i - 1))) {
                         powmult = 1;
-                    } else if (function.get(i - 1) == "*") {
-                        if (function.get(i - 3) == "-") {
+                    } else if ("*".equals(function.get(i - 1))) {
+                        if ("-".equals(function.get(i - 3))) {
                             powmult = -Integer.valueOf(function.get(i - 2));
                         } else {
                             powmult = Integer.valueOf(function.get(i - 2));
                         }
                     }
-                } else if (function.get(i) == "x") {
-                    if (function.get(i - 1) == "(") {
+                } else if ("x".equals(function.get(i))) {
+                    if ("(".equals(function.get(i - 1))) {
                         varmult = 1;
-                    } else if (function.get(i - 1) == "-") {
+                    } else if ("-".equals(function.get(i - 1))) {
                         varmult = -1;
-                    } else if (function.get(i - 1) == "*") {
-                        if (function.get(i - 3) == "-") {
+                    } else if ("*".equals(function.get(i - 1))) {
+                        if ("-".equals(function.get(i - 3))) {
                             varmult = -Integer.valueOf(function.get(i - 2));
                         } else {
                             varmult = Integer.valueOf(function.get(i - 2));
                         }
                     }
-                    if (function.get(i + 1) == ")") {
+                    if (")".equals(function.get(i + 1))) {
                         varabs = 0;
-                    } else if (function.get(i + 1) == "-") {
+                    } else if ("-".equals(function.get(i + 1))) {
                         varabs = -Integer.valueOf(function.get(i + 2));
                     } else {
                         varabs = Integer.valueOf(function.get(i + 2));
@@ -299,12 +290,12 @@ class MakeGraph extends JComponent {
             int varabs = 0;
 
             boolean brackets = false;
-            if (function.get(logpos - 1) == "-") {
+            if ("-".equals(function.get(logpos - 1))) {
                 logmult = -1;
-            } else if (function.get(logpos - 1) == "+") {
+            } else if ("+".equals(function.get(logpos - 1))) {
                 logmult = 1;
-            } else if (function.get(logpos - 1) == "*") {
-                if (function.get(logpos - 3) == "-") {
+            } else if ("*".equals(function.get(logpos - 1))) {
+                if ("-".equals(function.get(logpos - 3))) {
                     logmult = -Integer.valueOf(function.get(logpos - 2));
                 } else {
                     logmult = Integer.valueOf(function.get(logpos - 2));
@@ -313,12 +304,12 @@ class MakeGraph extends JComponent {
 
             for (int i = 0; i < function.size(); i++) {
 
-                if (function.get(i) == ")") {
+                if (")".equals(function.get(i))) {
                     brackets = false;
                     try {
-                        if (function.get(i + 1) == "-") {
+                        if ("-".equals(function.get(i + 1))) {
                             logabs = -Integer.valueOf(function.get(i + 2));
-                        } else if (function.get(i + 1) == "+") {
+                        } else if ("+".equals(function.get(i + 1))) {
                             logabs = Integer.valueOf(function.get(i + 2));
                         }
 
@@ -328,31 +319,30 @@ class MakeGraph extends JComponent {
 
                 }
                 if (brackets) {
-                    if (function.get(i) == "x") {
-                        if (function.get(i - 1) == "(") {
+                    if ("x".equals(function.get(i))) {
+                        if ("(".equals(function.get(i - 1))) {
                             varmult = 1;
-                        } else if (function.get(i - 1) == "-") {
+                        } else if ("-".equals(function.get(i - 1))) {
                             varmult = -1;
-                        } else if (function.get(i - 1) == "*") {
+                        } else if ("*".equals(function.get(i - 1))) {
 
-                            if (function.get(i - 3) == "-") {
+                            if ("-".equals(function.get(i - 3))) {
                                 varmult = -Integer.valueOf(function.get(i - 2));
                             } else {
                                 varmult = Integer.valueOf(function.get(i - 2));
-                                System.out.println("zde");
                             }
                         }
-                        if (function.get(i + 1) == ")") {
+                        if (")".equals(function.get(i + 1))) {
                             varabs = 0;
-                        } else if (function.get(i + 1) == "-") {
+                        } else if ("-".equals(function.get(i + 1))) {
                             varabs = -Integer.valueOf(function.get(i + 2));
-                        } else if (function.get(i + 1) == "+") {
+                        } else if ("+".equals(function.get(i + 1))) {
                             varabs = Integer.valueOf(function.get(i + 2));
                         }
                     }
 
                 }
-                if (function.get(i) == "(") {
+                if ("(".equals(function.get(i))) {
                     brackets = true;
                 }
             }
@@ -397,20 +387,20 @@ class MakeGraph extends JComponent {
 
             for (int i = 0; i < function.size(); i++) {
 
-                if (function.get(i) == "x") {
-                    if (function.get(i - 1) == "-") {
+                if ("x".equals(function.get(i))) {
+                    if ("-".equals(function.get(i - 1))) {
                         varmult = -1;
-                    } else if (function.get(i - 1) == "+") {
+                    } else if ("+".equals(function.get(i - 1))) {
                         varmult = 1;
-                    } else if (function.get(i - 1) == "*") {
-                        if (function.get(i - 3) == "-") {
+                    } else if ("*".equals(function.get(i - 1))) {
+                        if ("-".equals(function.get(i - 3))) {
                             varmult = -Integer.valueOf(function.get(i - 2));
                         } else {
                             varmult = Integer.valueOf(function.get(i - 2));
                         }
                     }
                     try {
-                        if (function.get(i + 1) == "-") {
+                        if ("-".equals(function.get(i + 1))) {
                             varabs = -Integer.valueOf(function.get(i + 2));
                         } else {
                             varabs = Integer.valueOf(function.get(i + 2));

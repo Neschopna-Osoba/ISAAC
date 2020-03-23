@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package isaac;
 
 import java.io.IOException;
@@ -18,12 +13,24 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
+ * Menu Controller class
  *
- * @author petrs
+ * @author Petr Salavec, 2020
  */
 public class MenuViewController implements Initializable {
 
+    // This opens normal calculator
+    @FXML
+    private void handleCalButtonAction(ActionEvent event) throws IOException {
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("StandartCalculator.fxml"));
+        Scene scene = new Scene(tableViewParent);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
+        window.setTitle("ISAAC");
+    }
+
+    //This opens equations calculator
     @FXML
     private void handleEquButtonAction(ActionEvent event) throws IOException {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
@@ -34,6 +41,7 @@ public class MenuViewController implements Initializable {
         window.setTitle("ISAAC");
     }
 
+    //This opens linear algebra calculator
     @FXML
     private void handleAlgButtonAction(ActionEvent event) throws IOException {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("LinearAlgebraView.fxml"));
@@ -44,6 +52,7 @@ public class MenuViewController implements Initializable {
         window.setTitle("ISAAC");
     }
 
+    //This opeans graph maker
     @FXML
     private void handleGraButtonAction(ActionEvent event) throws IOException {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("GraphView.fxml"));
@@ -54,19 +63,10 @@ public class MenuViewController implements Initializable {
         window.setTitle("ISAAC");
     }
 
+    //This opens logarithmic calculator
     @FXML
     private void handleLogButtonAction(ActionEvent event) throws IOException {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("LogarithmsView.fxml"));
-        Scene scene = new Scene(tableViewParent);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
-        window.setTitle("ISAAC");
-    }
-
-    @FXML
-    private void handleCalButtonAction(ActionEvent event) throws IOException {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("StandartCalculator.fxml"));
         Scene scene = new Scene(tableViewParent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);

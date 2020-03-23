@@ -1,10 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this equationlate file, choose Tools | Templates
- * and open the equationlate in the editor.
- */
 package isaac;
 
+import static isaac.UsefulMethods.isGonio;
+import static isaac.UsefulMethods.isLog;
+import static isaac.UsefulMethods.isSign;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -12,10 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import static isaac.EquationSolver.solveLin;
-import static isaac.EquationSolver.isVariable;
-import static isaac.EquationSolver.isNumber;
-import static isaac.EquationSolver.isSign;
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.fxml.FXMLLoader;
@@ -26,18 +20,11 @@ import javafx.stage.Stage;
 import javax.swing.JFrame;
 
 /**
+ * Graph View Controller
  *
- * @author petrs
+ * @author Petr Salavec, 2020
  */
 public class GraphViewController implements Initializable {
-
-    private static boolean isGonio(String s) {
-        return s == "sin" || s == "cos" || s == "tg" || s == "cotg";
-    }
-
-    private static boolean isLog(String s) {
-        return s == "log10" || s == "ln";
-    }
 
     boolean creatingNumber;
     boolean negative;
@@ -50,6 +37,7 @@ public class GraphViewController implements Initializable {
     boolean lin = false;
     boolean quad = false;
 
+    //Same methond as in Equation Controller
     private void numberCreation(String string) {
         if (creatingNumber) {
             creatingNumber = false;
@@ -59,7 +47,7 @@ public class GraphViewController implements Initializable {
             }
 
             equation.add(Integer.toString(number));
-            if ((string == "x" || string == "(" || isGonio(string) || isLog(string)) && !isSign(equation.get(equation.size() - 1)) && string != "" && string != "^") { //People often leave empty space between two elements --> 10x = 10 * x; 10(x+3) = 10 * (x+3)
+            if (("x".equals(string) || "(".equals(string) || isGonio(string) || isLog(string)) && !isSign(equation.get(equation.size() - 1)) && !"".equals(string) && !"^".equals(string)) { //People often leave empty space between two elements --> 10x = 10 * x; 10(x+3) = 10 * (x+3)
                 equation.add("*");
             }
             equation.add(string);
@@ -67,7 +55,7 @@ public class GraphViewController implements Initializable {
         } else {
 
             try {
-                if (equation.get(equation.size() - 1) == "x" && !isSign(string) && string != "" && string != "^" && string != ")") { //x(7+3) = x * (7+3)
+                if ("x".equals(equation.get(equation.size() - 1)) && !isSign(string) && !"".equals(string) && !"^".equals(string) && !")".equals(string)) { //x(7+3) = x * (7+3)
                     equation.add("*");
                 }
                 if (negative) {
@@ -233,7 +221,7 @@ public class GraphViewController implements Initializable {
 
         numberCreation("");
 
-        if (equation.get(0) != "-" && equation.get(0) != "+") {
+        if (!"-".equals(equation.get(0)) && !"+".equals(equation.get(0))) {
             equation.add(0, "+");
         }
         System.out.println(equation);

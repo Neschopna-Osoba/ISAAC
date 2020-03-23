@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this equationlate file, choose Tools | Templates
- * and open the equationlate in the editor.
- */
 package isaac;
 
 import java.net.URL;
@@ -12,11 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import static isaac.EquationSolver.solveLin;
-import static isaac.EquationSolver.isVariable;
-import static isaac.EquationSolver.isNumber;
-import static isaac.EquationSolver.isSign;
 import static isaac.SolveSimpleNumbers.solveNum;
+import static isaac.UsefulMethods.isSign;
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.fxml.FXMLLoader;
@@ -26,8 +18,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
+ * Standart Calculator View Controller
  *
- * @author petrs
+ * @author Petr Salavec, 2020
  */
 public class StandartCalculatorController implements Initializable {
 
@@ -51,7 +44,7 @@ public class StandartCalculatorController implements Initializable {
             }
 
             equation.add(Integer.toString(number));
-            if ((string == "x" || string == "(") && !isSign(equation.get(equation.size() - 1)) && string != "" && string != "^") { //People often leave empty space between two elements --> 10x = 10 * x; 10(x+3) = 10 * (x+3)
+            if (("x".equals(string) || "(".equals(string)) && !isSign(equation.get(equation.size() - 1)) && !"".equals(string) && !"^".equals(string)) { //People often leave empty space between two elements --> 10x = 10 * x; 10(x+3) = 10 * (x+3)
                 equation.add("*");
             }
             equation.add(string);
@@ -59,7 +52,7 @@ public class StandartCalculatorController implements Initializable {
         } else {
 
             try {
-                if (equation.get(equation.size() - 1) == "x" && !isSign(string) && string != "" && string != "^") { //x(7+3) = x * (7+3)
+                if ("x".equals(equation.get(equation.size() - 1)) && !isSign(string) && !"".equals(string) && !"^".equals(string)) {
                     equation.add("*");
                 }
                 if (negative) {

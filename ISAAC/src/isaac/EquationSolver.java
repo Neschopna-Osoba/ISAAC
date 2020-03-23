@@ -1,120 +1,65 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package isaac;
 
 import java.util.ArrayList;
 
+import static isaac.UsefulMethods.cleanup;
+import static isaac.UsefulMethods.add;
+import static isaac.UsefulMethods.substract;
+import static isaac.UsefulMethods.multiply;
+import static isaac.UsefulMethods.divide;
+import static isaac.UsefulMethods.power;
+
 /**
+ * Class in which equations with variables are solved
  *
- * @author petrs
+ * @author Petr Salavec, 2020
  */
 public class EquationSolver {
 
-    private static String add(String s, String t) {
-        return Double.toString(Double.valueOf(s) + Double.valueOf(t));
-    }
-
-    private static String substract(String s, String t) {
-        return Double.toString(Double.valueOf(s) - Double.valueOf(t));
-    }
-
-    private static String multiply(String s, String t) {
-        return Double.toString(Double.valueOf(s) * Double.valueOf(t));
-    }
-
-    private static String divide(String s, String t) {
-        return Double.toString(Double.valueOf(s) / Double.valueOf(t));
-    }
-
-    private static String power(String s, String t) {
-        double d = Double.valueOf(s);
-        for (int i = 1; i < Integer.valueOf(t); i++) {
-            d = d * Double.valueOf(s);
-        }
-        return Double.toString(d);
-    }
-
-    private static void vyhodnotVyraz(ArrayList<String> arr) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private static ArrayList<String> cleanup(ArrayList<String> arr, int i, int j) {
-        for (int k = j; k >= i; k--) {
-            arr.remove(k);
-        }
-        return arr;
-    }
-
+    //Global value of quadratic variable in equation
     static String quadVarValue = "0";
+    //Global value of linear variable in equation
     static String varValue = "0";
+    //Global value of absulute element in equation
     static String absValue = "0";
 
-    public static Boolean isSign(String s) {
-        if (s == "+" || s == "-" || s == "*" || s == "/" || s == "=") {
-
-            return true;
-        }
-        return false;
-    }
-
-    public static Boolean isNumber(Character ch) {
-        if (ch == '0' || ch == '1' || ch == '2' || ch == '3' || ch == '4' || ch == '5' || ch == '6' || ch == '7' || ch == '8' || ch == '9') {
-            return true;
-        }
-        return false;
-    }
-
-    public static Boolean isVariable(Character ch) {
-        if (ch == 'x') {
-            return true;
-        }
-        return false;
-    }
-
-    public static Boolean isBracket(Character ch) {
-        if (ch == '(' || ch == ')') {
-            return true;
-        }
-        return false;
-    }
-
+    //Solves the equation in given ArrayList, returns ArrayList with three values - (0) - linear variable; (1) - absolute element; (2) - quadratic variable
     private static void solve(ArrayList<String> arr) {
 
+        //Local value of quadratic variable in equation
         String currQuadVarValue = "0";
+        //Local value of linear variable in equation
         String currVarValue = "0";
+        //Local value of absulute element in equation
         String currAbsValue = "0";
 
+        //***DIVISION***
+        //First we go through our equation and check for divisions
         for (int i = 0; i < arr.size(); i++) {
-            if (arr.get(i) == "/") {
-                if (arr.get(i - 1) == "x") {
-
-                    if (arr.get(i - 2) == "-") { // -x/2
+            if ("/".equals(arr.get(i))) {
+                if ("x".equals(arr.get(i - 1))) {    // If we find variable before our division -> ex: x/2
+                    if ("-".equals(arr.get(i - 2))) {      // If we find variable before our division -> ex: x/2
                         currVarValue = substract(currVarValue, divide("1", arr.get(i + 1)));
                         arr = cleanup(arr, i - 2, i + 1);
                         i = -1;
-
-                    } else if (arr.get(i - 2) == "*") {
-                        if (arr.get(i - 4) == "-") { // -4*x/2
+                    } else if ("*".equals(arr.get(i - 2))) {    // If the variable is multiplied
+                        if ("-".equals(arr.get(i - 4))) {   // If there is a - before the number that multiplies the variable -> ex: -2*x/2
                             currVarValue = substract(currVarValue, divide(arr.get(i - 3), arr.get(i + 1)));
                             arr = cleanup(arr, i - 4, i + 1);
                             i = -1;
-                        } else { //+4*x/2
+                        } else {    // If there is not a - before the number
                             currVarValue = add(currVarValue, divide(arr.get(i - 3), arr.get(i + 1)));
                             arr = cleanup(arr, i - 4, i + 1);
                             i = -1;
                         }
-                    } else { //+x/2
+                    } else {
                         currVarValue = add(currVarValue, divide("1", arr.get(i + 1)));
                         arr = cleanup(arr, i - 2, i + 1);
                         i = -1;
                     }
 
-                } else { //4/2
-
-                    if (arr.get(i - 2) == "-") {
+                } else {    //If there is no variable it is just standart division -> ex: 4/2
+                    if ("-".equals(arr.get(i - 2))) {
                         currAbsValue = substract(currAbsValue, divide(arr.get(i - 1), arr.get(i + 1)));
                         arr = cleanup(arr, i - 2, i + 1);
                         i = -1;
@@ -128,39 +73,36 @@ public class EquationSolver {
             }
 
         }
+        //***POWER***
+        //Second we check for any powers
         for (int i = 0; i < arr.size(); i++) {
-            if (arr.get(i) == "^") {
-                if (arr.get(i - 1) == "x") { //Assume that variable is quadratic
-                    if (!"2".equals(arr.get(i + 1))) {
+            if ("^".equals(arr.get(i))) {
+                if ("x".equals(arr.get(i - 1))) { //Check for varuable
+                    if (!"2".equals(arr.get(i + 1))) { //If the variable in not squared, then we have a problem
                         System.err.println("Sorry, I cant handle different that quadratic variables :(");
-                    } else {
-                        if (arr.get(i - 2) == "-") {
+                    } else { //Squared variable
+                        if ("-".equals(arr.get(i - 2))) {
                             currQuadVarValue = substract(currQuadVarValue, "1");
                             arr = cleanup(arr, i - 2, i + 1);
                             i = -1;
-                        } else if (arr.get(i - 2) == "*") {
-                            try {
-                                if (arr.get(i - 4) == "-") {
-                                    currQuadVarValue = substract(currQuadVarValue, arr.get(i - 3));
-                                    arr = cleanup(arr, i - 4, i + 1);
-                                    i = -1;
-                                } else {
-                                    currQuadVarValue = add(currQuadVarValue, arr.get(i - 3));
-                                    arr = cleanup(arr, i - 4, i + 1);
-                                    i = -1;
-                                }
-                            } catch (ArrayIndexOutOfBoundsException e) {
+                        } else if ("*".equals(arr.get(i - 2))) {
+                            if ("-".equals(arr.get(i - 4))) {
+                                currQuadVarValue = substract(currQuadVarValue, arr.get(i - 3));
+                                arr = cleanup(arr, i - 4, i + 1);
+                                i = -1;
+                            } else {
                                 currQuadVarValue = add(currQuadVarValue, arr.get(i - 3));
-                                arr = cleanup(arr, i - 3, i + 1);
+                                arr = cleanup(arr, i - 4, i + 1);
                                 i = -1;
                             }
+
                         } else {
                             currQuadVarValue = add(currQuadVarValue, "1");
                             arr = cleanup(arr, i - 2, i + 1);
                             i = -1;
                         }
                     }
-                } else {
+                } else { //It is just two numbers
                     currAbsValue = add(currAbsValue, power(arr.get(i - 1), arr.get(i + 1)));
                     arr = cleanup(arr, i - 1, i + 1);
                     i = -1;
@@ -168,10 +110,12 @@ public class EquationSolver {
             }
         }
 
+        //***MULTIPLICATION***
+        //Third we check for any multiplication
         for (int i = 0; i < arr.size(); i++) {
-            if (arr.get(i) == "*") {
-                if (arr.get(i + 1) == "x") {
-                    if (arr.get(i - 2) == "-") { // -2*x
+            if ("*".equals(arr.get(i))) {
+                if ("x".equals(arr.get(i + 1))) {
+                    if ("-".equals(arr.get(i - 2))) {
                         currVarValue = substract(currVarValue, arr.get(i - 1));
                         arr = cleanup(arr, i - 2, i + 1);
                         i = -1;
@@ -182,7 +126,7 @@ public class EquationSolver {
                         i = -1;
                     }
                 } else {
-                    if (arr.get(i - 2) == "-") { // -2*3
+                    if ("-".equals(arr.get(i - 2))) {
                         currAbsValue = substract(currAbsValue, (multiply(arr.get(i - 1), arr.get(i + 1))));
                         arr = cleanup(arr, i - 2, i + 1);
                         i = -1;
@@ -195,26 +139,27 @@ public class EquationSolver {
             }
         }
 
+        //***ADDITION***
+        //Fourth we check for any additions
         for (int i = 0; i < arr.size(); i++) {
-            System.out.println(arr);
-            System.out.println(arr.get(i));
-            if (arr.get(i) == "+") {
-                if (arr.get(i + 1) == "x") {
+            if ("+".equals(arr.get(i))) {
+                if ("x".equals(arr.get(i + 1))) {
                     currVarValue = add(currVarValue, "1");
                     arr = cleanup(arr, i, i + 1);
                     i = -1;
                 } else {
-                    System.out.println("tet3");
                     currAbsValue = add(currAbsValue, arr.get(i + 1));
                     arr = cleanup(arr, i, i + 1);
                     i = -1;
                 }
             }
         }
-        for (int i = 0; i < arr.size(); i++) {
 
-            if (arr.get(i) == "-") {
-                if (arr.get(i + 1) == "x") {
+        //***SUBSTRACTION***
+        //Last but not least we check for substractions
+        for (int i = 0; i < arr.size(); i++) {
+            if ("-".equals(arr.get(i))) {
+                if ("x".equals(arr.get(i + 1))) {
                     currVarValue = substract(currVarValue, "1");
                     arr = cleanup(arr, i, i + 1);
                     i = -1;
@@ -226,21 +171,23 @@ public class EquationSolver {
 
             }
         }
-        arr.clear(); //Sometimes for some reason, there is left a blank spot in array
-        arr.add(currVarValue);
-        arr.add(currAbsValue);
-        arr.add(currQuadVarValue);
-        System.out.println(currAbsValue + " test2");
+        arr.clear(); //Sometimes for some reason, there is left a blank spot in array, this makes sure, that the array will be empty
+        arr.add(currVarValue); //Add local linear variable value to ArrayList
+        arr.add(currAbsValue); //Add local absolute element value to ArrayList
+        arr.add(currQuadVarValue); //Add local quadratic variable value to ArrayList
     }
 
     public static String solveLin(ArrayList<String> equation) {
+        //This clears the global variables
         absValue = "0";
         varValue = "0";
         quadVarValue = "0";
+
+        //Test
         System.out.println("Original equation: " + equation);
 
-        ArrayList<String> eq = new ArrayList();
-        int posOfEqu = 0; //Position of =
+        ArrayList<String> eq = new ArrayList(); //New ArrayList which will contain only half of the equation
+        int posOfEqu = 0; //Position of = sign
 
         for (int i = 0; i < equation.size(); i++) { //Find position of = sign in array
             if ("=".equals(equation.get(i))) {
@@ -250,44 +197,42 @@ public class EquationSolver {
 
         for (int koeficient = 0; koeficient <= 1; koeficient++) { //Which side of equation are we currently on; 0 = left, 1 = right
 
-            //Creates array eq with eqither left or right side of equation
-            if (koeficient == 0) {
+            //Fills ArrayList eq with either left or right side of equation
+            if (koeficient == 0) { //Add left side
                 for (int i = 0; i < posOfEqu; i++) {
                     eq.add(equation.get(i));
                 }
-            } else {
+            } else { //Add right side
                 eq.clear();
-                if (!"+".equals(equation.get(posOfEqu + 1)) && !"-".equals(equation.get(posOfEqu + 1))) { // =4+3 >> =+4+3
+                if (!"+".equals(equation.get(posOfEqu + 1)) && !"-".equals(equation.get(posOfEqu + 1))) { //Add + to the beggining of the right side of equation
                     eq.add("+");
                 }
                 for (int i = posOfEqu + 1; i < equation.size(); i++) {
-
                     eq.add(equation.get(i));
                 }
-                //Since we have moved to the right side, our values of need to be multiplied by -1
+                //Since we have moved to the right side of equation, all of values of need to be multiplied by -1
                 varValue = multiply(varValue, "-1");
                 absValue = multiply(absValue, "-1");
                 quadVarValue = multiply(quadVarValue, "-1");
 
             }
-            System.out.println(eq);
 
-//*****BRACKETS*****
-            int leftBracket = 0; //Position of left bracket in the array
+            //***BRACKETS***
+            //We need to find brackets first and deal with them
+            int leftBracket = 0; //Position of left bracket in the equation
+
             for (int i = 0; i < eq.size(); i++) {
                 if ("(".equals(eq.get(i))) {
                     leftBracket = i;
                 }
-
                 if (")".equals(eq.get(i))) { //Here we create a new array with just the equation in the brackets and solve it
-                    //Zavorky od leftBracket do i
                     ArrayList<String> arr = new ArrayList();
                     for (int j = leftBracket + 1; j < i; j++) {
                         arr.add(eq.get(j));
                     }
 
-                    solve(arr); //array that will be returned will consist of three numbers in this order: (0)value of variable (1)absolute value (2) value of quad variable
-                    eq = cleanup(eq, leftBracket, i); //Finally we remove the brackets from the original equations
+                    solve(arr); //Array that will be returned will consist of three numbers in this order: (0)value of variable (1)absolute value (2) value of quad variable
+                    eq = cleanup(eq, leftBracket, i); //Finally we remove the brackets from the original equation
 
                     if ("+".equals(eq.get(leftBracket - 1))) { //If there was a + before brackets we will simply add the bracket value to the global equation values
                         varValue = add(varValue, arr.get(0));//Brackets var Value
@@ -323,6 +268,7 @@ public class EquationSolver {
             //Now that brackets have been solved we can solve the rest of equation
             solve(eq); //This will once again return three values (0)var (1)abs (2)quad
 
+            //Adding the local values to the global values, they might be zero and as such try catch block are used to make sure no funny bussiness happens
             try {
                 varValue = add(varValue, eq.get(0));
             } catch (Exception e) {

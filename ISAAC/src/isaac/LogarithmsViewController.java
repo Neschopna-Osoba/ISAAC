@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package isaac;
 
 import java.io.IOException;
@@ -19,24 +14,25 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
+ * Logarithms View Controller
  *
- * @author petrs
+ * @author Petr Salavec, 2020
  */
 public class LogarithmsViewController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    //Base
     @FXML
     private TextField textA;
+    //Variable
     @FXML
     private TextField textB;
+    //Exponent
     @FXML
     private TextField textX;
 
     @FXML
     private void handleCalcButton(ActionEvent event) throws IOException {
+
         if (textX.getText().isEmpty()) {
             double result = Math.log10(Double.valueOf(textB.getText())) / Math.log10(Double.valueOf(textA.getText()));
             textX.setText(String.valueOf(result));

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package isaac;
 
 import java.io.IOException;
@@ -16,21 +11,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
+ * Linear Algebra Controller
  *
- * @author petrs
+ * @author Petr Salavec, 2020
  */
 public class LinearAlgebraViewController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
     @FXML
     private TextField firstField;
     @FXML
@@ -43,18 +33,14 @@ public class LinearAlgebraViewController implements Initializable {
     @FXML
     private void handleCalcButton(ActionEvent event) {
 
-        ArrayList<Double> arr1 = new ArrayList();
-        ArrayList<Double> arr2 = new ArrayList();
-        ArrayList<Double> arr3 = new ArrayList();
-
-        arr1 = getNumbers(firstField.getText());
-        arr2 = getNumbers(secondField.getText());
-        arr3 = getNumbers(thirdField.getText());
+        ArrayList<Double> arr1 = getNumbers(firstField.getText());
+        ArrayList<Double> arr2 = getNumbers(secondField.getText());
+        ArrayList<Double> arr3 = getNumbers(thirdField.getText());
 
         /**
-         * Determinanty Cramerův algortimus
+         * Determinanty Cramerův algortimus, dokumentace!!
          */
-        if (arr3.isEmpty()) { //2 Variables
+        if (arr3.isEmpty()) { //2 Variables, x and y
             double divider = arr1.get(0) * arr2.get(1)
                     - arr1.get(1) * arr2.get(0);
 
@@ -65,7 +51,7 @@ public class LinearAlgebraViewController implements Initializable {
                     - arr1.get(2) * arr2.get(0);
             textResult.setText("x = " + x / divider + "; y = " + y / divider);
 
-        } else { //3 Variables
+        } else { //3 Variables, x,y and z
 
             double divider = arr1.get(0) * arr2.get(1) * arr3.get(2)
                     + arr2.get(0) * arr3.get(1) * arr1.get(2)
@@ -73,7 +59,6 @@ public class LinearAlgebraViewController implements Initializable {
                     - arr1.get(2) * arr2.get(1) * arr3.get(0)
                     - arr2.get(2) * arr3.get(1) * arr1.get(0)
                     - arr3.get(2) * arr1.get(1) * arr2.get(0);
-            System.out.println(divider);
 
             double x = arr1.get(3) * arr2.get(1) * arr3.get(2)
                     + arr2.get(3) * arr3.get(1) * arr1.get(2)
@@ -81,15 +66,12 @@ public class LinearAlgebraViewController implements Initializable {
                     - arr1.get(2) * arr2.get(1) * arr3.get(3)
                     - arr2.get(2) * arr3.get(1) * arr1.get(3)
                     - arr3.get(2) * arr1.get(1) * arr2.get(3);
-            System.out.println(x);
-
             double y = arr1.get(0) * arr2.get(3) * arr3.get(2)
                     + arr2.get(0) * arr3.get(3) * arr1.get(2)
                     + arr3.get(0) * arr1.get(3) * arr2.get(2)
                     - arr1.get(2) * arr2.get(3) * arr3.get(0)
                     - arr2.get(2) * arr3.get(3) * arr1.get(0)
                     - arr3.get(2) * arr1.get(3) * arr2.get(0);
-            System.out.println(y);
 
             double z = arr1.get(0) * arr2.get(1) * arr3.get(3)
                     + arr2.get(0) * arr3.get(1) * arr1.get(3)
@@ -97,13 +79,13 @@ public class LinearAlgebraViewController implements Initializable {
                     - arr1.get(3) * arr2.get(1) * arr3.get(0)
                     - arr2.get(3) * arr3.get(1) * arr1.get(0)
                     - arr3.get(3) * arr1.get(1) * arr2.get(0);
-            System.out.println(z);
             textResult.setText("x = " + x / divider + "; y = " + y / divider + "; z = " + z / divider);
 
         }
     }
 
     private ArrayList<Double> getNumbers(String s) {
+        //This is a bit different than in other classes as I found that the buttons were just really annoying to use with these equations
         ArrayList<Double> arr = new ArrayList();
         int number = 0;
         boolean positive = true;
