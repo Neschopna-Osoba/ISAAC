@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -83,6 +84,18 @@ public class MenuViewController implements Initializable {
         window.setScene(scene);
         window.show();
         window.setTitle("ISAAC");
+    }
+
+    //This opens help window
+    @FXML
+    private void handleHelpButtonAction(ActionEvent event) throws IOException {
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("Help.fxml"));
+        Scene scene = new Scene(tableViewParent);
+        Stage window = new Stage();
+        window.setScene(scene);
+        window.show();
+        window.setTitle("ISAAC- Help");
+        window.getIcons().add(new Image("/iconHelp.png"));
     }
 
     @Override

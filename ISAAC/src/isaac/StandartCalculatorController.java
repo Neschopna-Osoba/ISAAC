@@ -44,7 +44,7 @@ public class StandartCalculatorController implements Initializable {
             }
 
             equation.add(Integer.toString(number));
-            if (("x".equals(string) || "(".equals(string)) && !isSign(equation.get(equation.size() - 1)) && !"".equals(string) && !"^".equals(string)) { //People often leave empty space between two elements --> 10x = 10 * x; 10(x+3) = 10 * (x+3)
+            if (("x".equals(string) || "(".equals(string)) || "√".equals(string) && !isSign(equation.get(equation.size() - 1)) && !"".equals(string) && !"^".equals(string)) { //People often leave empty space between two elements --> 10x = 10 * x; 10(x+3) = 10 * (x+3)
                 equation.add("*");
             }
             equation.add(string);
@@ -149,6 +149,13 @@ public class StandartCalculatorController implements Initializable {
         equationOnScreen = equationOnScreen + "^";
         textField.setText(equationOnScreen);
         numberCreation("^");
+    }
+
+    @FXML
+    private void handleSquaredButtonAction(ActionEvent event) {
+        equationOnScreen = equationOnScreen + "√";
+        textField.setText(equationOnScreen);
+        numberCreation("√");
     }
 
     @FXML

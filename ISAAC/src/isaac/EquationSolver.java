@@ -38,7 +38,7 @@ public class EquationSolver {
         for (int i = 0; i < arr.size(); i++) {
             if ("/".equals(arr.get(i))) {
                 if ("x".equals(arr.get(i - 1))) {    // If we find variable before our division -> ex: x/2
-                    if ("-".equals(arr.get(i - 2))) {      // If we find variable before our division -> ex: x/2
+                    if ("-".equals(arr.get(i - 2))) {      // If we find variable before our division -> ex: -x/2
                         currVarValue = substract(currVarValue, divide("1", arr.get(i + 1)));
                         arr = cleanup(arr, i - 2, i + 1);
                         i = -1;
@@ -77,7 +77,7 @@ public class EquationSolver {
         //Second we check for any powers
         for (int i = 0; i < arr.size(); i++) {
             if ("^".equals(arr.get(i))) {
-                if ("x".equals(arr.get(i - 1))) { //Check for varuable
+                if ("x".equals(arr.get(i - 1))) { //Check for variable
                     if (!"2".equals(arr.get(i + 1))) { //If the variable in not squared, then we have a problem
                         System.err.println("Sorry, I cant handle different that quadratic variables :(");
                     } else { //Squared variable
@@ -125,7 +125,19 @@ public class EquationSolver {
                         arr = cleanup(arr, i - 2, i + 1);
                         i = -1;
                     }
+                } else if ("x".equals(arr.get(i - 1))) {
+                    if ("-".equals(arr.get(i - 2))) {
+                        currVarValue = substract(currVarValue, arr.get(i + 1));
+                        arr = cleanup(arr, i - 2, i + 1);
+                        i = -1;
+
+                    } else {
+                        currVarValue = add(currVarValue, arr.get(i + 1));
+                        arr = cleanup(arr, i - 2, i + 1);
+                        i = -1;
+                    }
                 } else {
+
                     if ("-".equals(arr.get(i - 2))) {
                         currAbsValue = substract(currAbsValue, (multiply(arr.get(i - 1), arr.get(i + 1))));
                         arr = cleanup(arr, i - 2, i + 1);

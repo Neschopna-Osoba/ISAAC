@@ -54,6 +54,13 @@ public class SolveSimpleNumbers {
                 i = 0;
             }
         }
+        for (int i = 0; i < arr.size(); i++) {
+            if ("√".equals(arr.get(i))) {
+                arr.add(i, String.valueOf(Math.sqrt(Double.valueOf(arr.get(i + 1)))));
+                arr = cleanup(arr, i + 1, i + 2);
+                i = 0;
+            }
+        }
 
         for (int i = 0; i < arr.size(); i++) {
             if ("/".equals(arr.get(i))) {

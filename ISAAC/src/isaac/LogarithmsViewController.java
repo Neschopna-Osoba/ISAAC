@@ -33,6 +33,7 @@ public class LogarithmsViewController implements Initializable {
     @FXML
     private void handleCalcButton(ActionEvent event) throws IOException {
 
+        //Calculating the empty value
         if (textX.getText().isEmpty()) {
             double result = Math.log10(Double.valueOf(textB.getText())) / Math.log10(Double.valueOf(textA.getText()));
             textX.setText(String.valueOf(result));

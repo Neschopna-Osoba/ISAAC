@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import javax.swing.JComponent;
 
 /**
- * This class create graph
+ * This class creates graph
  *
  * @author Petr Salavec, 2020
  */
@@ -41,6 +41,7 @@ class MakeGraph extends JComponent {
 
         int goniopos = 0;
         int powpos = 0;
+        int sqrtpos = 0;
         int logpos = 0;
 
         boolean sin = false;
@@ -68,18 +69,22 @@ class MakeGraph extends JComponent {
             } else if ("^".equals(function.get(i))) {
                 powpos = i;
                 pow = true;
+            } else if ("√".equals(function.get(i))) {
+                sqrtpos = i;
+                sqrt = true;
             } else if ("log10".equals(function.get(i))) {
                 logpos = i;
                 log10 = true;
             } else if ("ln".equals(function.get(i))) {
                 logpos = i;
                 ln = true;
-            }
-            /*  if (function.get(i) == "sqrtsSYMBOL") {
-                sqrt = true;
-            }   */
 
+            }
         }
+        /**
+         * Comments are provided only for the goniometric function as the rest
+         * is almost identical.
+         */
 
         if (sin || cos || tg || cotg) { //Goniometric functions
 
@@ -90,6 +95,7 @@ class MakeGraph extends JComponent {
             int varabs = 0; //Variable absolute lement
             boolean brackets = false;
 
+            //Here we find out the four main values of the function
             if ("-".equals(function.get(goniopos - 1))) {
                 gonmult = -1;
             } else if ("+".equals(function.get(goniopos - 1))) {
@@ -146,7 +152,7 @@ class MakeGraph extends JComponent {
                     brackets = true;
                 }
             }
-
+            //Check which type of gonio function is it, and draw it
             if (sin) {
                 for (int i = 0; i <= x0; i++) {
                     double iScaled = i / scale;
@@ -279,6 +285,82 @@ class MakeGraph extends JComponent {
             g1.drawPolyline(p2.xpoints, p2.ypoints, p2.npoints);
 
         } else if (sqrt) {
+            int varmult = 1;
+            int varabs = 0;
+            int sqrtmult = 1;
+            int sqrtabs = 0;
+
+            boolean brackets = false;
+
+            if ("-".equals(function.get(sqrtpos - 1))) {
+                sqrtmult = -1;
+            } else if ("+".equals(function.get(sqrtpos - 1))) {
+                sqrtmult = 1;
+            } else if ("*".equals(function.get(sqrtpos - 1))) {
+                if ("-".equals(function.get(sqrtpos - 3))) {
+                    sqrtmult = -Integer.valueOf(function.get(sqrtpos - 2));
+                } else {
+                    sqrtmult = Integer.valueOf(function.get(sqrtpos - 2));
+                }
+            }
+
+            for (int i = 0; i < function.size(); i++) {
+
+                if (")".equals(function.get(i))) {
+                    brackets = false;
+                    try {
+                        if ("-".equals(function.get(i + 1))) {
+                            sqrtabs = -Integer.valueOf(function.get(i + 2));
+                        } else if ("+".equals(function.get(i + 1))) {
+                            sqrtabs = Integer.valueOf(function.get(i + 2));
+                        }
+
+                    } catch (Exception e) {
+                        sqrtabs = 0;
+                    }
+
+                }
+                if (brackets) {
+                    if ("x".equals(function.get(i))) {
+                        if ("(".equals(function.get(i - 1))) {
+                            varmult = 1;
+                        } else if ("-".equals(function.get(i - 1))) {
+                            varmult = -1;
+                        } else if ("*".equals(function.get(i - 1))) {
+
+                            if ("-".equals(function.get(i - 3))) {
+                                varmult = -Integer.valueOf(function.get(i - 2));
+                            } else {
+                                varmult = Integer.valueOf(function.get(i - 2));
+                            }
+                        }
+                        if (")".equals(function.get(i + 1))) {
+                            varabs = 0;
+                        } else if ("-".equals(function.get(i + 1))) {
+                            varabs = -Integer.valueOf(function.get(i + 2));
+                        } else if ("+".equals(function.get(i + 1))) {
+                            varabs = Integer.valueOf(function.get(i + 2));
+                        }
+                    }
+
+                }
+                if ("(".equals(function.get(i))) {
+                    brackets = true;
+                }
+            }
+            System.out.println(sqrtmult);
+            for (int i = 0; i <= x0; i++) {
+                double iScaled = i / scale;
+                p1.addPoint(x0 + i, y0 - (int) Math.round(scale * sqrtmult * (Math.sqrt(varmult * (iScaled + varabs)) + sqrtabs * scale)));
+            }
+            g1.drawPolyline(p1.xpoints, p1.ypoints, p1.npoints);
+
+            for (int i = 0; i <= x0; i++) {
+                double iScaled = i / scale;
+                p2.addPoint(x0 - i, y0 - (int) Math.round(scale * sqrtmult * (Math.sqrt(varmult * (-iScaled + varabs))) + sqrtabs * scale));
+            }
+
+            g1.drawPolyline(p2.xpoints, p2.ypoints, p2.npoints);
 
         } else if (log10 || ln) {
             int logmult = 0;

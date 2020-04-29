@@ -109,5 +109,10 @@
             </font>
         </Button>
         <Button layoutX="309.0" layoutY="461.0" mnemonicParsing="false" onAction="#handleMenuButtonAction" prefHeight="25.0" prefWidth="156.0" text="Menu" />
+      <Button fx:id="buttonSqrt" layoutX="405.0" layoutY="173.0" mnemonicParsing="false" onAction="#handleSquaredButtonAction" prefHeight="39.0" prefWidth="34.0" text="√">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

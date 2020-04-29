@@ -8,12 +8,13 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
- * ISAAC
+ * ISAAC - Incredibly Smart And Amazing Calculator
  *
  * @author Petr Salavec, 2020
  */
 public class ISAAC extends Application {
 
+    //Shows the menu for ISAAC
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("MenuView.fxml"));

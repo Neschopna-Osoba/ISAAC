@@ -32,15 +32,17 @@ public class LinearAlgebraViewController implements Initializable {
 
     @FXML
     private void handleCalcButton(ActionEvent event) {
+        /**
+         * We use Cramers rule, to get the roots, of equations with two or three
+         * variables.
+         */
 
         ArrayList<Double> arr1 = getNumbers(firstField.getText());
         ArrayList<Double> arr2 = getNumbers(secondField.getText());
         ArrayList<Double> arr3 = getNumbers(thirdField.getText());
 
-        /**
-         * Determinanty Cramerův algortimus -- do dokumentace!!
-         */
-        if (arr3.isEmpty()) { //2 Variables, x and y
+        //Two variables
+        if (arr3.isEmpty()) {
             double divider = arr1.get(0) * arr2.get(1)
                     - arr1.get(1) * arr2.get(0);
 
@@ -51,7 +53,8 @@ public class LinearAlgebraViewController implements Initializable {
                     - arr1.get(2) * arr2.get(0);
             textResult.setText("x = " + x / divider + "; y = " + y / divider);
 
-        } else { //3 Variables, x,y and z
+            //Three variables
+        } else {
 
             double divider = arr1.get(0) * arr2.get(1) * arr3.get(2)
                     + arr2.get(0) * arr3.get(1) * arr1.get(2)
@@ -85,7 +88,12 @@ public class LinearAlgebraViewController implements Initializable {
     }
 
     private ArrayList<Double> getNumbers(String s) {
-        //This is a bit different than in other classes as I found that the buttons were just really annoying to use with these equations
+        /**
+         * This is a bit different than in other classes as I found that the
+         * buttons were just really annoying to use with these equations. So
+         * instead, here we type the equation.
+         */
+
         ArrayList<Double> arr = new ArrayList();
         int number = 0;
         boolean positive = true;

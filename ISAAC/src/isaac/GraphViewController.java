@@ -47,7 +47,7 @@ public class GraphViewController implements Initializable {
             }
 
             equation.add(Integer.toString(number));
-            if (("x".equals(string) || "(".equals(string) || isGonio(string) || isLog(string)) && !isSign(equation.get(equation.size() - 1)) && !"".equals(string) && !"^".equals(string)) { //People often leave empty space between two elements --> 10x = 10 * x; 10(x+3) = 10 * (x+3)
+            if (("x".equals(string) || "(".equals(string) || isGonio(string) || isLog(string)) || "√".equals(string) && !isSign(equation.get(equation.size() - 1)) && !"".equals(string) && !"^".equals(string)) { //People often leave empty space between two elements --> 10x = 10 * x; 10(x+3) = 10 * (x+3)
                 equation.add("*");
             }
             equation.add(string);
@@ -167,6 +167,13 @@ public class GraphViewController implements Initializable {
     }
 
     @FXML
+    private void handleSquaredButtonAction(ActionEvent event) {
+        equationOnScreen = equationOnScreen + "√";
+        textField.setText(equationOnScreen);
+        numberCreation("√");
+    }
+
+    @FXML
     private void handleNegButtonAction(ActionEvent event) {
         equationOnScreen = equationOnScreen + " -";
         textField.setText(equationOnScreen);
@@ -234,7 +241,7 @@ public class GraphViewController implements Initializable {
         System.out.println(equation);
         JFrame frame = new JFrame();
         frame.setSize(800, 800);
-        frame.setLocationRelativeTo(null); //centers the window BUT WHY WHY WHY
+        frame.setLocationRelativeTo(null); //centers the window BUT WHY
         frame.setTitle("Graph");
         MakeGraph graph = new MakeGraph(equation);
         frame.add(graph);
