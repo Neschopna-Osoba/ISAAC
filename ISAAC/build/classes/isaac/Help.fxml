@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="489.0" prefWidth="734.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isaac.HelpController">
+   <children>
+      <Accordion layoutX="378.0" layoutY="49.0" prefHeight="411.0" prefWidth="328.0">
+        <panes>
+          <TitledPane text="Graphs">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label alignment="TOP_LEFT" layoutX="7.0" layoutY="8.0" prefHeight="267.0" prefWidth="312.0" text="The function is written using buttons. When finished, clicking on Generate Graph will open a new window with the generated graph.&#10;&#10;Supported input examples:&#10;sin(x); 4(x^2);  2(x-3)+7&#10;Unsupported input exmples:&#10;sin(cos(x)); tg(x^2); √x/x&#10;" wrapText="true">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+            </content>
+               <font>
+                  <Font size="24.0" />
+               </font>
+          </TitledPane>
+          <TitledPane text="Logarithms">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label alignment="TOP_LEFT" layoutX="14.0" layoutY="16.0" prefHeight="226.0" prefWidth="302.0" text="The logarithmic calculator calculates the remaining value in a logarithm from two inputted values. &#10;Values are inputted using a keyboard. Clicking on e will add Euler's number -&gt; creates a natural logarithm." wrapText="true">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+            </content>
+               <font>
+                  <Font size="24.0" />
+               </font>
+          </TitledPane>
+          <TitledPane text="Higher degree equations">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label alignment="TOP_LEFT" layoutX="9.0" layoutY="8.0" prefHeight="272.0" prefWidth="312.0" text="A maximum degree supported is the fifth power.&#10;Values before variables are inputted using a keyboard.&#10;To prevent any issues it is advisable to not leave anything blank and instead write zeroes.&#10;Write just the numbers and either + or - in the boxes." wrapText="true">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+            </content>
+               <font>
+                  <Font size="24.0" />
+               </font>
+          </TitledPane>
+        </panes>
+      </Accordion>
+      <AnchorPane id="AnchorPane" layoutX="26.0" layoutY="14.0" prefHeight="447.0" prefWidth="328.0">
+         <children>
+            <Accordion layoutY="34.0" prefHeight="411.0" prefWidth="328.0">
+               <panes>
+                  <TitledPane text="Standart Calculator">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label alignment="TOP_LEFT" layoutX="14.0" layoutY="16.0" prefHeight="226.0" prefWidth="302.0" text="Standart calculator operating just with numbers. Input is done using the buttons, clicking on Calculate will show the result." wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </TitledPane>
+                  <TitledPane text="Equations Calculator">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label alignment="TOP_LEFT" layoutX="7.0" layoutY="8.0" prefHeight="267.0" prefWidth="312.0" text="Equations are inputted using the buttons. Clicking on Calculate will show the result (results).&#10;&#10;Supported input example:&#10;2x^2+3x=18/6-x+4^3&#10;Unsupported input examples:&#10;x^3; 12/x; (x-1)(x+1); 1/(x+1)" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </TitledPane>
+                  <TitledPane text="Linear System">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label alignment="TOP_LEFT" layoutX="9.0" layoutY="8.0" prefHeight="272.0" prefWidth="312.0" text="Linear equations are written using a keyboard into the three fields.&#10;Clicking on calculate will show the results in the lower field.&#10;&#10;Supported input examples:&#10;x + 3y - 9z = 3; 2x - 5y = 0&#10;Unsupported input exmples:&#10;3*x - 9*y + 3/z = 11&#10;Do NOT write the multiplication sign.&#10;" wrapText="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </TitledPane>
+               </panes>
+            </Accordion>
+         </children>
+      </AnchorPane>
+      <Text layoutX="320.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Help Page">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
