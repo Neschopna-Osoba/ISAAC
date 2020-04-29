@@ -14,22 +14,22 @@ import static isaac.UsefulMethods.power;
  * @author Petr Salavec, 2020
  */
 public class SolveSimpleNumbers {
-    
+
     public static String solveNum(ArrayList<String> equation) {
-        
+
         if (equation.get(0).isEmpty()) { //Sometimes the array comes with first value as empty, dont really know why, so this is just an easy fix
             equation.remove(0);
         }
-        
+
         int leftBracketPos = 0;
-        
+
         while (equation.contains("(")) {
             for (int i = 0; i < equation.size(); i++) {
                 if ("(".equals(equation.get(i))) {
                     leftBracketPos = i;
                 } else if (")".equals(equation.get(i))) {
                     ArrayList<String> arr = new ArrayList();
-                    
+
                     for (int j = leftBracketPos + 1; j < i; j++) {
                         arr.add(equation.get(j));
                     }
@@ -38,15 +38,15 @@ public class SolveSimpleNumbers {
                     cleanup(equation, leftBracketPos + 1, i + 1);
                     System.out.println(equation);
                 }
-                
+
             }
         }
         solve(equation);
         return equation.get(0);
     }
-    
+
     private static void solve(ArrayList<String> arr) {
-        
+
         for (int i = 0; i < arr.size(); i++) {
             if ("^".equals(arr.get(i))) {
                 arr.add(i - 1, power(arr.get(i - 1), arr.get(i + 1)));
@@ -54,7 +54,7 @@ public class SolveSimpleNumbers {
                 i = 0;
             }
         }
-        
+
         for (int i = 0; i < arr.size(); i++) {
             if ("/".equals(arr.get(i))) {
                 arr.add(i - 1, divide(arr.get(i - 1), arr.get(i + 1)));
@@ -62,7 +62,7 @@ public class SolveSimpleNumbers {
                 i = 0;
             }
         }
-        
+
         for (int i = 0; i < arr.size(); i++) {
             if ("*".equals(arr.get(i))) {
                 arr.add(i - 1, multiply(arr.get(i - 1), arr.get(i + 1)));
@@ -71,7 +71,7 @@ public class SolveSimpleNumbers {
                 System.out.println(arr);
             }
         }
-        
+
         for (int i = 0; i < arr.size(); i++) {
             if ("+".equals(arr.get(i))) {
                 arr.add(i - 1, add(arr.get(i - 1), arr.get(i + 1)));

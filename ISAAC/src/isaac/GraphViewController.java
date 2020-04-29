@@ -176,44 +176,51 @@ public class GraphViewController implements Initializable {
 
     @FXML
     private void handleSinButtonAction(ActionEvent event) {
-        equationOnScreen = equationOnScreen + "sin";
+        equationOnScreen = equationOnScreen + "sin(";
         textField.setText(equationOnScreen);
         numberCreation("sin");
+        numberCreation("(");
+
     }
 
     @FXML
     private void handleCosButtonAction(ActionEvent event) {
-        equationOnScreen = equationOnScreen + "cos";
+        equationOnScreen = equationOnScreen + "cos(";
         textField.setText(equationOnScreen);
         numberCreation("cos");
+        numberCreation("(");
     }
 
     @FXML
     private void handleTgButtonAction(ActionEvent event) {
-        equationOnScreen = equationOnScreen + "tg";
+        equationOnScreen = equationOnScreen + "tg(";
         textField.setText(equationOnScreen);
         numberCreation("tg");
+        numberCreation("(");
     }
 
     @FXML
     private void handleCotgButtonAction(ActionEvent event) {
-        equationOnScreen = equationOnScreen + "cotg";
+        equationOnScreen = equationOnScreen + "cotg(";
         textField.setText(equationOnScreen);
         numberCreation("cotg");
+        numberCreation("(");
     }
 
     @FXML
     private void handleLog10ButtonAction(ActionEvent event) {
-        equationOnScreen = equationOnScreen + "log10";
+        equationOnScreen = equationOnScreen + "log10(";
         textField.setText(equationOnScreen);
         numberCreation("log10");
+        numberCreation("(");
     }
 
     @FXML
     private void handleLnButtonAction(ActionEvent event) {
-        equationOnScreen = equationOnScreen + "ln";
+        equationOnScreen = equationOnScreen + "ln(";
         textField.setText(equationOnScreen);
         numberCreation("ln");
+        numberCreation("(");
     }
 
     @FXML

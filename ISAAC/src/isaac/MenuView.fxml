@@ -12,10 +12,36 @@
             <Font name="System Bold" size="40.0" />
          </font>
       </Text>
-      <Button layoutX="58.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleEquButtonAction" prefHeight="53.0" prefWidth="169.0" text="Equations Calculator" />
-      <Button layoutX="58.0" layoutY="247.0" mnemonicParsing="false" onAction="#handleAlgButtonAction" prefHeight="53.0" prefWidth="169.0" text="Linear Algebra" />
-      <Button layoutX="331.0" layoutY="102.0" mnemonicParsing="false" onAction="#handleGraButtonAction" prefHeight="53.0" prefWidth="169.0" text="Graphs" />
-      <Button layoutX="331.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleLogButtonAction" prefHeight="53.0" prefWidth="169.0" text="Logarithms" />
-      <Button layoutX="58.0" layoutY="102.0" mnemonicParsing="false" onAction="#handleCalButtonAction" prefHeight="53.0" prefWidth="169.0" text="Standart Calculator" />
+      <Button layoutX="58.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleEquButtonAction" prefHeight="53.0" prefWidth="169.0" text="Equations Calculator">
+         <font>
+            <Font size="13.0" />
+         </font></Button>
+      <Button layoutX="58.0" layoutY="247.0" mnemonicParsing="false" onAction="#handleAlgButtonAction" prefHeight="53.0" prefWidth="169.0" text="Linear Algebra">
+         <font>
+            <Font size="13.0" />
+         </font></Button>
+      <Button layoutX="331.0" layoutY="102.0" mnemonicParsing="false" onAction="#handleGraButtonAction" prefHeight="53.0" prefWidth="169.0" text="Graphs">
+         <font>
+            <Font size="13.0" />
+         </font></Button>
+      <Button layoutX="331.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleLogButtonAction" prefHeight="53.0" prefWidth="169.0" text="Logarithms">
+         <font>
+            <Font size="13.0" />
+         </font></Button>
+      <Button layoutX="58.0" layoutY="102.0" mnemonicParsing="false" onAction="#handleCalButtonAction" prefHeight="53.0" prefWidth="169.0" text="Standart Calculator">
+         <font>
+            <Font size="13.0" />
+         </font></Button>
+      <Text layoutX="480.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Petr Salavec">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
+      <Text layoutX="545.0" layoutY="377.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2020" />
+      <Button layoutX="331.0" layoutY="247.0" mnemonicParsing="false" onAction="#handleHighButtonAction" prefHeight="53.0" prefWidth="169.0" text="High Degree Equations">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

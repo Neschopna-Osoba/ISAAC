@@ -38,7 +38,7 @@ public class LinearAlgebraViewController implements Initializable {
         ArrayList<Double> arr3 = getNumbers(thirdField.getText());
 
         /**
-         * Determinanty Cramerův algortimus, dokumentace!!
+         * Determinanty Cramerův algortimus -- do dokumentace!!
          */
         if (arr3.isEmpty()) { //2 Variables, x and y
             double divider = arr1.get(0) * arr2.get(1)

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="286.0" prefWidth="747.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="isaac.HighDegreeEquationsController">
+   <children>
+      <Button layoutX="648.0" layoutY="239.0" mnemonicParsing="false" onAction="#handleMenuButtonAction" text="Menu" />
+      <TextField fx:id="field5" alignment="CENTER" layoutX="25.0" layoutY="23.0" prefHeight="35.0" prefWidth="79.0" promptText="-5">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Text layoutX="109.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="x">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <TextField fx:id="field4" alignment="CENTER" layoutX="141.0" layoutY="23.0" prefHeight="35.0" prefWidth="79.0" promptText="+7">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="field3" alignment="CENTER" layoutX="255.0" layoutY="24.0" prefHeight="35.0" prefWidth="79.0" promptText="-6">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="field2" alignment="CENTER" layoutX="369.0" layoutY="24.0" prefHeight="35.0" prefWidth="79.0" promptText="0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="field1" alignment="CENTER" layoutX="490.0" layoutY="24.0" prefHeight="35.0" prefWidth="79.0" promptText="+3">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Text layoutX="574.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="x">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <TextField fx:id="field0" alignment="CENTER" layoutX="598.0" layoutY="24.0" prefHeight="35.0" prefWidth="79.0" promptText="-17">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Text layoutX="689.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="= 0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Button layoutX="28.0" layoutY="91.0" mnemonicParsing="false" onAction="#handleCalcButton" prefHeight="52.0" prefWidth="691.0" text="Calculate">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Button>
+      <TextField fx:id="fieldResult" alignment="CENTER" editable="false" layoutX="179.0" layoutY="166.0" prefHeight="60.0" prefWidth="390.0">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </TextField>
+      <Text layoutX="120.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="5">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="226.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="x">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="237.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="339.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="x">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="350.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="453.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="x">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text layoutX="464.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

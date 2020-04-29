@@ -74,6 +74,17 @@ public class MenuViewController implements Initializable {
         window.setTitle("ISAAC");
     }
 
+    //This opens calculator of highter degree equations
+    @FXML
+    private void handleHighButtonAction(ActionEvent event) throws IOException {
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("HighDegreeEquations.fxml"));
+        Scene scene = new Scene(tableViewParent);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
+        window.setTitle("ISAAC");
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

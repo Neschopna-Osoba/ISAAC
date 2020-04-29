@@ -78,6 +78,7 @@ class MakeGraph extends JComponent {
             /*  if (function.get(i) == "sqrtsSYMBOL") {
                 sqrt = true;
             }   */
+
         }
 
         if (sin || cos || tg || cotg) { //Goniometric functions
@@ -183,7 +184,6 @@ class MakeGraph extends JComponent {
                     p1.addPoint(x0 + i, y0 - (int) Math.round(scale * gonmult * Math.tan(varmult * (iScaled + varabs)) + gonabs * scale));
 
                 }
-
                 g1.drawPolyline(p1.xpoints, p1.ypoints, p1.npoints);
 
                 for (int i = 0; i <= x0; i++) {
@@ -211,15 +211,14 @@ class MakeGraph extends JComponent {
             }
         } else if (pow) {
             int powvalue = 0;
-            int varmult = 0;
+            int varmult = 1;
             int varabs = 0;
-            int powmult = 0;
+            int powmult = 1;
             int powabs = 0;
 
             boolean brackets = false;
 
             powvalue = Integer.valueOf(function.get(powpos + 1));
-
             try {
                 if ("-".equals(function.get(powpos + 2))) {
                     powabs = -Integer.valueOf(function.get(powpos + 3));
@@ -259,7 +258,7 @@ class MakeGraph extends JComponent {
                         varabs = 0;
                     } else if ("-".equals(function.get(i + 1))) {
                         varabs = -Integer.valueOf(function.get(i + 2));
-                    } else {
+                    } else if ("+".equals(function.get(i + 1))) {
                         varabs = Integer.valueOf(function.get(i + 2));
                     }
 
@@ -270,7 +269,6 @@ class MakeGraph extends JComponent {
                 double iScaled = i / scale;
                 p1.addPoint(x0 + i, y0 - (int) Math.round(scale * powmult * (Math.pow((varmult * (iScaled + varabs)), powvalue)) + powabs * scale));
             }
-
             g1.drawPolyline(p1.xpoints, p1.ypoints, p1.npoints);
 
             for (int i = 0; i <= x0; i++) {
@@ -283,7 +281,6 @@ class MakeGraph extends JComponent {
         } else if (sqrt) {
 
         } else if (log10 || ln) {
-            System.out.println("test");
             int logmult = 0;
             int varmult = 0;
             int logabs = 0;
@@ -348,34 +345,38 @@ class MakeGraph extends JComponent {
             }
 
             if (log10) {
-                for (int i = 0; i <= x0; i++) {
-                    double iScaled = i / scale;
-                    p1.addPoint(x0 + i, y0 - (int) Math.round(scale * logmult * Math.log10(varmult * (iScaled + varabs)) + logabs * scale));
+                if (varmult > 0) {
+                    for (int i = 0; i <= x0; i++) {
+                        double iScaled = i / scale;
+                        p1.addPoint(x0 + i, y0 - (int) Math.round(scale * logmult * Math.log10(varmult * (iScaled + varabs)) + logabs * scale));
 
+                    }
+
+                    g1.drawPolyline(p1.xpoints, p1.ypoints, p1.npoints);
+                } else if (varmult < 0) {
+                    varmult = varmult * -1;
+                    for (int i = 0; i <= x0; i++) {
+                        double iScaled = i / scale;
+                        p2.addPoint(x0 - i, y0 - (int) Math.round(scale * logmult * Math.log10(varmult * (iScaled + varabs)) + logabs * scale));
+
+                    }
+                    g1.drawPolyline(p2.xpoints, p2.ypoints, p2.npoints);
                 }
-
-                g1.drawPolyline(p1.xpoints, p1.ypoints, p1.npoints);
-
-                for (int i = 0; i <= x0; i++) {
-                    double iScaled = i / scale;
-                    p2.addPoint(x0 - i, y0 + (int) Math.round(scale * logmult * Math.log10(varmult * (iScaled - varabs)) - logabs * scale));
-
-                }
-                g1.drawPolyline(p2.xpoints, p2.ypoints, p2.npoints);
-
             } else if (ln) {
+                if (varmult > 0) {
+                    for (int i = 0; i <= x0; i++) {
+                        double iScaled = i / scale;
+                        p1.addPoint(x0 + i, y0 - (int) Math.round(scale * logmult * Math.log(varmult * (iScaled + varabs)) + logabs * scale));
 
-                for (int i = 0; i <= x0; i++) {
-                    double iScaled = i / scale;
-                    p1.addPoint(x0 + i, y0 - (int) Math.round(scale * logmult * Math.log(varmult * (iScaled + varabs)) + logabs * scale));
-
+                    }
                 }
 
                 g1.drawPolyline(p1.xpoints, p1.ypoints, p1.npoints);
-
+            } else if (varmult < 0) {
+                varmult = varmult * -1;
                 for (int i = 0; i <= x0; i++) {
                     double iScaled = i / scale;
-                    p2.addPoint(x0 - i, y0 + (int) Math.round(scale * logmult * Math.log(varmult * (iScaled - varabs)) - logabs * scale));
+                    p2.addPoint(x0 - i, y0 - (int) Math.round(scale * logmult * Math.log(varmult * (iScaled + varabs)) + logabs * scale));
 
                 }
                 g1.drawPolyline(p2.xpoints, p2.ypoints, p2.npoints);
@@ -415,14 +416,14 @@ class MakeGraph extends JComponent {
 
             for (int i = 0; i <= x0; i++) {
                 double iScaled = i / scale;
-                p1.addPoint(x0 + i, y0 - (int) Math.round(scale * varmult * (iScaled - varabs)));
+                p1.addPoint(x0 + i, y0 - (int) Math.round(scale * varmult * (iScaled + varabs)));
             }
 
             g1.drawPolyline(p1.xpoints, p1.ypoints, p1.npoints);
 
             for (int i = 0; i <= x0; i++) {
                 double iScaled = i / scale;
-                p2.addPoint(x0 - i, y0 - (int) Math.round(scale * varmult * (-iScaled - varabs)));
+                p2.addPoint(x0 - i, y0 - (int) Math.round(scale * varmult * (-iScaled + varabs)));
             }
 
             g1.drawPolyline(p2.xpoints, p2.ypoints, p2.npoints);
